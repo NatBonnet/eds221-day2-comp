@@ -96,3 +96,55 @@ fruit[1,] # first row
 #mutable
 fruit[2,1] <- "pineapple"
 fruit
+
+# select multiple elements
+
+x <- 1:10
+x
+
+x[2]
+x[c(1:2)]
+x[c(1,3,6)]
+x[c(1,1,1)]
+x[c(1.2, 2.7)] #truncates this and then looks in that position
+
+# exclude elements
+x[-10] # gives all but the 10th element
+x[-c(2, 4, 6, 8, 10)] # can make an exclusion vector
+# can't miz negatives
+x[c(-1,2)] # this is kinda like asking for everything but the first but also only 2 so she's confused
+
+# index with logical vectors
+x[c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE )] # excluding based on false-true, excluding the values corresponding to false
+
+x[x>3]
+
+x[] # returns original vector
+
+# subsetting and assigning multiple values
+
+x <- 1:5
+x[c(1,2)] <- 2:3 #replacing 1 and 2 with 2 and 3
+x[-1] <- 4:1 # replacing all but the first element with 4, 3, 2, 1
+
+# subset rows in data frames based on conditions (logical subsetting)
+
+mtcars[mtcars$gear == 5,] # searching for every row where the column value for gear is equal to 5
+
+mtcars[mtcars$gear ==5 & mtcars$cyl == 4, ]
+
+#shorthand version using the subset function
+subset(mtcars, gear == 5)
+subset(mtcars, gear ==5 & cyl == 4)
+
+# remove columns
+
+df <- data.frame(x = 1:3, 
+                 y= 3:1, 
+                 z = c("A", "B", "C"))
+df
+  
+df$z <- NULL
+df[c("x", "y")]
+
+df[setdiff(names(df), "z")]# look at all the names in my dataframe and keep them all except for z
